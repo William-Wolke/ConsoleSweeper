@@ -4,38 +4,45 @@ namespace ConsoleSweeper
 {
     public class SweeperGrid
     {
-        public int[,] grid = new int[10,10];
-        public Random generator = new Random();
+        public int[,] grid = new int[10, 10];
+        private Random generator = new Random();
 
-        public SweeperGrid() {
+        public SweeperGrid()
+        {
+            int mines = 17;
 
-            bool done = false;
-
-            while(done == false) {
-
-                int mines = 0;
-
-                for (int i = 10; i < grid.Length; i++)
+            for (int i = 10; i < grid.Length; i++)
+            {
+                for (int j = 10; j < grid.Length; j++)
                 {
-                    for (int j = 10; j < grid.Length; j++)
-                    {
-                        int x = generator.Next(0, 100);
+                    grid[i, j] = 9;
 
-                        if(x <= 17) {
-                            grid[i,j] = 10;
-                        }
-
-                        else {
-                            grid[i,j] = 9;
-                        }  
-                    }
                 }
+            }
 
-                
+            for (int i = 0; i < mines; i++)
+            {
+                grid[generator.Next(0,10), generator.Next(0,10)] = 10;
+            }
+
+
+        }
+
+        public bool CheckPosition (int x, int y) {
+
+            bool mine = false;
+
+            if (grid[x,y] == 9) {
+                return mine;
+            }
+
+            else {
+                mine = true;
+                return mine;
             }
         }
 
     }
 
-    
+
 }
